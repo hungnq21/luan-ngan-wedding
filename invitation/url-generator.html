@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Base64 Link Generator</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Toastify CSS -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+  />
+
+  <style>
+    body {
+      background: #f9f9f9;
+    }
+    .container-box {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .output {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 6px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body class="d-flex justify-content-center align-items-center" style="margin-top: 20px;">
+
+  <div class="container container-box">
+    <h4 class="mb-3 text-center">Base64 Link Generator</h4>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Nhập message</label>
+      <textarea id="message" class="form-control" rows="3" placeholder="Nhập text ..."></textarea>
+    </div>
+
+    <div class="d-grid gap-2 mb-4">
+      <button onclick="generateLink()" class="btn btn-danger">Tạo link</button>
+    </div>
+
+    <label class="form-label fw-bold">Link hoàn chỉnh:</label>
+    <div class="input-group">
+      <div id="outputLink" class="output form-control">
+        https://htuyet-qanh-wedding.site?guest=
+      </div>
+      <button onclick="copyLink()" class="btn btn-success">Copy</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Toastify JS -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <script>
+    function notify(msg, success=true) {
+      Toastify({
+        text: msg,
+        duration: 2500,
+        close: true,
+        gravity: "top",
+        position: "center",
+        style: {
+          background: success
+            ? "linear-gradient(to right, #00b09b, #96c93d)"
+            : "linear-gradient(to right, #FF5A5F, #E04848)"
+        }
+      }).showToast();
+    }
+
+    function generateLink() {
+      const msg = document.getElementById('message').value.trim();
+      if (!msg) return notify("Vui lòng nhập message!", false);
+
+      const base64Msg = btoa(unescape(encodeURIComponent(msg)));
+      const fullLink = `https://htuyet-qanh-wedding.site?guest=${base64Msg}`;
+      document.getElementById('outputLink').textContent = fullLink;
+
+      notify("Tạo link thành công!");
+    }
+
+    function copyLink() {
+      const text = document.getElementById('outputLink').textContent;
+
+      navigator.clipboard.writeText(text).then(() => {
+        notify("Đã copy vào clipboard!");
+      }).catch(() => {
+        notify("Copy thất bại!", false);
+      });
+    }
+  </script>
+
+</body>
+</html>
