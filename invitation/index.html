@@ -7551,7 +7551,7 @@
                   class="com-text-block p-absolute is-animation"
                 >
                   <div class="text-block">
-                    <h4 class="text-block-css full-width">Quốc Anh</h4>
+                    <h4 class="text-block-css full-width">Văn Luân</h4>
                   </div>
                 </div>
                 <div id="w-cdlp31uy" class="p-absolute">
@@ -7565,7 +7565,7 @@
                 >
                   <div class="text-block">
                     <h3 class="text-block-css full-width">
-                      30.11<br />2025<br />
+                      17.1<br />2026<br />
                     </h3>
                   </div>
                 </div>
@@ -7574,7 +7574,7 @@
                   class="com-text-block p-absolute is-animation"
                 >
                   <div class="text-block">
-                    <h4 class="text-block-css full-width">Hoàng Tuyết</h4>
+                    <h4 class="text-block-css full-width">Thanh Ngân</h4>
                   </div>
                 </div>
                 <div id="w-s0wpujoa" class="p-absolute">
@@ -8165,7 +8165,7 @@
                 <div id="w-klql4ysp" class="com-button p-absolute">
                   <div class="button-css full-height full-width lazy">
                     <span class="button-loader"></span>
-                    <div class="button-text full-width u-select-none">
+                    <div id="button-send-msg" class="button-text full-width u-select-none">
                       GỬI NGAY
                     </div>
                     <button
@@ -8562,13 +8562,14 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+		console.log(11);
         const params = new URLSearchParams(window.location.search);
         const currentLang = params.get('lang') || 'vi';
       
         const switcher = document.getElementById('lang-switcher');
         const flag = document.getElementById('lang-flag');
       
-        if (!switcher || !flag) return;
+        //if (!switcher || !flag) return;
       
         // Đường dẫn ảnh cờ (đổi path nếu cần)
         const flags = {
@@ -8593,9 +8594,51 @@
           params.set('lang', config.next);
           window.location.search = params.toString();
         });
+
+
+        if (currentLang == 'en') {
+
+          // Input placeholders
+          document.querySelector('input[name="name"]')
+            .placeholder = "What is your name?";
+
+          document.querySelector('input[name="relation"]')
+            .placeholder = "What is your relationship with the couple?";
+
+          document.querySelector('input[name="message"]')
+            .placeholder = "Send your wishes to the couple!";
+
+          // Select placeholder (option disabled)
+          const joinSelect = document.querySelector('select[name="join"]');
+          joinSelect.options[0].text = "Will you attend?";
+
+          // Select options
+          joinSelect.querySelector('option[value="Có Thể Tham Dự"]').text =
+            "Will Attend";
+
+          joinSelect.querySelector('option[value="Không Thể Tham Dự"]').text =
+            "Will Not Attend";
+
+          // Button text
+          const sendBtn = document.querySelector('#button-send-msg');
+          if (sendBtn) {
+            sendBtn.textContent = "SEND NOW";
+          }
+        } 
       });
   </script>
   
+
+
+
+
+
+
+
+
+
+
+
     <script>
       const form = document.getElementById("hl53suyf");
       const url = "https://script.google.com/macros/s/AKfycbwsUeNklYJGulV0RiRtGR8QEuA-5GDJr9_JOMNdUrmpMGrcjIuRjL8A3g38rxb6q5PR/exec"; // your Apps Script URL
